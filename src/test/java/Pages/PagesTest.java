@@ -97,7 +97,7 @@ public class PagesTest {
 
         AdPage adPage = new AdPage();
         adPage.newAd();
-        String newTitleAdJob = "New QA223";
+        String newTitleAdJob = "New QA111";
         adPage.titleAdJob(newTitleAdJob);
         adPage.descriptionAdJob("Create test cases for new project");
         adPage.priceAdJob("500");
@@ -106,6 +106,12 @@ public class PagesTest {
 
         Assert.assertEquals(adPage.createdNewJob(), newTitleAdJob,
                 "Ad is not added on desk");
+
+        if(adPage.createdNewJob() != newTitleAdJob){
+            throw new RuntimeException(
+                    "Ad is not added on desk"
+            );
+        }
 
     }
 

@@ -2,7 +2,6 @@ package Pages;
 
 import Navigate.ButtonsValue;
 import com.codeborne.selenide.Condition;
-import com.github.javafaker.Faker;
 
 import static com.codeborne.selenide.Selenide.*;
 
