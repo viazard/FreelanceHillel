@@ -15,15 +15,15 @@ public class ProfilePage extends ButtonsValue {
         btnEditInfo.click();
     }
 
-    public void setNewName(){
+    public void setNewName(String newName){
         setProfileNewName.click();
         setProfileNewName.clear();
-        setProfileNewName.sendKeys("Love");
+        setProfileNewName.sendKeys(newName);
     }
-    public void setNewLastName(){
+    public void setNewLastName(String newLastName){
         setProfileNewLastName.click();
         setProfileNewLastName.clear();
-        setProfileNewLastName.sendKeys("Bogan");
+        setProfileNewLastName.sendKeys(newLastName);
     }
 
     public void updateUserNameInfo(){
@@ -31,7 +31,7 @@ public class ProfilePage extends ButtonsValue {
     }
 
     public String checkUpdateTitleUser(){
-        return titelName.getText();
+        return titleName.getText();
     }
 
     public String checkUpdateMainUserInfo() {
