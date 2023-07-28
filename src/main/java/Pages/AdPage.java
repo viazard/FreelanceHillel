@@ -2,8 +2,7 @@ package Pages;
 
 import Navigate.ButtonsValue;
 import com.codeborne.selenide.Condition;
-
-import static com.codeborne.selenide.Selenide.open;
+import com.codeborne.selenide.Selenide;
 
 public class AdPage extends ButtonsValue {
 
@@ -36,7 +35,30 @@ public class AdPage extends ButtonsValue {
         btnCreateJob.click();
     }
 
+    public void countComments(){
+        for (int i = 0; i < listJobCards.size(); i++){
+            System.out.println("Job " + listJobTitle.get(i).getText() + " have " + listOfCommentsForJobs.get(i).getText());
+        }
+    }
+
+    public void deleteJob(int numberOfJobCard){
+        btnDeleteJob.get(numberOfJobCard).click();
+        switchTo();
+    }
+
+    public static void switchTo(){
+        Selenide.switchTo().alert().accept();
+    }
+    public int listCardJobs(){
+        return listJobCards.size();
+    }
+
+    public String countJobsList(){
+        return countJobsList.getText();
+    }
+
     public String createdNewJob(){
+
         return addedLastJob.getText();
     }
 

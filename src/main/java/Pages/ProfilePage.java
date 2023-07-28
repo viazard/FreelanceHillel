@@ -27,14 +27,17 @@ public class ProfilePage extends ButtonsValue {
     }
 
     public void updateUserNameInfo(){
+
         btnSubmitUpdateUserProfile.click();
     }
 
     public String checkUpdateTitleUser(){
+
         return titleName.getText();
     }
 
     public String checkUpdateMainUserInfo() {
+
         return updatedProfileName.getText();
     }
 
