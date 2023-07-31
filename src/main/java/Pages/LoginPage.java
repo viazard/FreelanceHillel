@@ -6,13 +6,13 @@ import com.codeborne.selenide.Condition;
 import static com.codeborne.selenide.Selenide.open;
 
 public class LoginPage extends ButtonsValue {
-    public void loginPage() {
+    public void loginPage(String userName, String password) {
         open("/login");
 
         setUserName.click();
-        setUserName.sendKeys("Dusty Carr");
+        setUserName.sendKeys(userName);
         setPassword.click();
-        setPassword.sendKeys("123456789");
+        setPassword.sendKeys(password);
 
         loginButton.should(Condition.visible).shouldNot(Condition.disabled).click();
 
@@ -22,10 +22,6 @@ public class LoginPage extends ButtonsValue {
         profileButton.click();
         dropMenu.should(Condition.exist).shouldBe(Condition.visible);
         profileMenu.click();
-    }
-
-    public void profileEditPage(){
-
     }
 
     public String getTitle(){

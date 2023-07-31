@@ -1,7 +1,9 @@
 package Navigate;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class ButtonsValue {
@@ -18,7 +20,6 @@ public class ButtonsValue {
     public SelenideElement titleName = $x("//h3[@class='ng-star-inserted']");
     public SelenideElement informCreateJob = $x("//h2[text()='Create Job']");
     public SelenideElement addedLastJob = $x("//app-my-jobs//mat-card[1]//mat-card-title");
-
     public SelenideElement setUserName = $x("//input[@formcontrolname='username']");
     public SelenideElement setName = $x("//input[@formcontrolname='name']");
     public SelenideElement setLastName = $x("//input[@formcontrolname='lastname']");
@@ -35,9 +36,17 @@ public class ButtonsValue {
     public SelenideElement btnSubmitUpdateUserProfile = $x("//div[@class='row']/button[2]");
     public SelenideElement btnAddJob = $x("//button[@routerlink='/profile/add-job']");
     public SelenideElement btnCreateJob = $x("//button[@class='mat-focus-indicator mat-flat-button mat-button-base mat-primary']/span[text()=' Create job ']");
+    public SelenideElement btnAdViewInfo = $x("//div/mat-card//button[1]");
+    public SelenideElement btnLeaveCommentToAd = $x("//button/span[text()=' Leave comment ']");
+    public SelenideElement btnCloseJobDetailes = $x("//button/span[text()='Close job details']");
+    public ElementsCollection btnDeleteJob = $$x("//mat-card//button");
     public SelenideElement titleAdJob = $x("//input[@id='mat-input-4']");
     public SelenideElement descriptionAdJob = $x("//textarea[@id='mat-input-5']");
     public SelenideElement priceAdJob = $x("//input[@id='mat-input-6']");
-
-
+    public SelenideElement mainAdPage = $x("//app-index[@class='ng-star-inserted']");
+    public SelenideElement inputComment = $x("//textarea[@id='mat-input-0']");
+    public SelenideElement countJobsList = $x("//h2[@class='ng-star-inserted']");
+    public ElementsCollection listJobCards = $$x("//div/mat-card");
+    public ElementsCollection listOfCommentsForJobs = $$x("//mat-card/mat-card-subtitle/mat-card-subtitle[1]");
+    public ElementsCollection listJobTitle = $$x("//div[@class='mat-card-header-text']");
 }
