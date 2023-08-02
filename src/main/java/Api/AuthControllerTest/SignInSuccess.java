@@ -1,6 +1,8 @@
 package Api.AuthControllerTest;
 
-public class SignInSuccess {
+import java.io.Serializable;
+
+public class SignInSuccess implements Serializable {
     private boolean success;
     private String token;
     private String message;
