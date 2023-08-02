@@ -19,6 +19,10 @@
         <versionTestng>7.8.0</versionTestng>
         <versionWebDriverManager>5.4.0</versionWebDriverManager>
         <fakerVersion>1.0.2</fakerVersion>
+        <versionRestAssured>5.3.1</versionRestAssured>
+        <versionJunit>4.13.2</versionJunit>
+        <versionJackson>2.15.2</versionJackson>
+        <versionMatchers>2.2</versionMatchers>
     </properties>
 
     <dependencies>
@@ -71,6 +75,44 @@
             <artifactId>javafaker</artifactId>
             <version>${fakerVersion}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${versionRestAssured}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.3.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${versionJunit}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${versionJackson}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-library -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-library</artifactId>
+            <version>${versionMatchers}</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
