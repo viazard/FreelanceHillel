@@ -34,25 +34,20 @@ public class AuthController {
         oos.close();
     }
 
-    public void signIn (String userName, String password) throws IOException {
+    public String signIn (String userName, String password) throws IOException {
         UserSignIn userSignInCred = new UserSignIn();
 
         userSignInCred.setUsername(userName);
         userSignInCred.setPassword(password);
 
-        UserSignIn userSignIn = given()
+        String token = given()
                 .body(userSignInCred)
                 .when()
                 .contentType(ContentType.JSON)
                 .post(URL+"/api/auth/signin")
-                .then().log().all()
-                .extract().as(UserSignIn.class);
+                .then()
+                .extract().body().jsonPath().get("token");
 
-        FileOutputStream fos = new FileOutputStream("result.bin");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(userSignIn.isSuccess());
-        oos.writeObject(userSignIn.getToken());
-
-        oos.close();
+        return token;
     }
 }
