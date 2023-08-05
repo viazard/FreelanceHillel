@@ -1,4 +1,4 @@
-package Api.AuthControllerTest;
+package Api.POJOClasses.AuthController;
 
 public class UserSignIn {
    private String username;
