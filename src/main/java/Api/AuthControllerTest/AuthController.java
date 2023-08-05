@@ -1,58 +1,54 @@
 package Api.AuthControllerTest;
 
-
+import Api.POJOClasses.AuthController.UserSignIn;
+import Api.POJOClasses.AuthController.UserSignUp;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
+import static Api.Statuses.Statuses.STATUS_OK;
 import static io.restassured.RestAssured.given;
 
 public class AuthController {
     private static final String URL = "https://freelance.lsrv.in.ua";
 
-    public void signUp(String fakerName, String fakerPassword) throws IOException {
+    public String signUp(String fakerName, String fakerPassword) throws IOException {
         UserSignUp userSignUp = new UserSignUp();
+
         userSignUp.setUsername(fakerName);
         userSignUp.setPassword(fakerPassword);
         userSignUp.setConfirmPassword(fakerPassword);
 
-        SignInSuccess signInSuccess = given()
+
+        String message = given()
                 .body(userSignUp)
                 .when()
                 .contentType(ContentType.JSON)
                 .post(URL + "/api/auth/signup")
-                .then().log().all()
-                .extract().as(SignInSuccess.class);
+                .then().log().body()
+                .extract().body().jsonPath().get("message");
 
-        FileOutputStream fos = new FileOutputStream("result.bin");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(signInSuccess.getMessage());
-
-        oos.close();
+        return message;
     }
 
-    public void signIn (String userName, String password) throws IOException {
+    public String signIn (String userName, String password) throws Exception {
         UserSignIn userSignInCred = new UserSignIn();
 
         userSignInCred.setUsername(userName);
         userSignInCred.setPassword(password);
 
-        UserSignIn userSignIn = given()
+        Response response = given()
                 .body(userSignInCred)
                 .when()
                 .contentType(ContentType.JSON)
-                .post(URL+"/api/auth/signin")
-                .then().log().all()
-                .extract().as(UserSignIn.class);
+                .post(URL + "/api/auth/signin");
 
-        FileOutputStream fos = new FileOutputStream("result.bin");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(userSignIn.isSuccess());
-        oos.writeObject(userSignIn.getToken());
+        if (response.getStatusCode() != STATUS_OK) {
+            throw new Exception("User is not logged, error CODE: " + response.getStatusCode());
+        }
 
-        oos.close();
+        return response.getBody().jsonPath().get("token").toString();
     }
 }

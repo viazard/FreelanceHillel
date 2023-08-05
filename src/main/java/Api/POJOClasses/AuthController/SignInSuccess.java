@@ -1,4 +1,4 @@
-package Api.AuthControllerTest;
+package Api.POJOClasses.AuthController;
 
 import java.io.Serializable;
 

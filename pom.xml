@@ -54,6 +54,8 @@
             <version>${versionJson}</version>
         </dependency>
 
+
+
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -111,6 +113,12 @@
             <artifactId>hamcrest-library</artifactId>
             <version>${versionMatchers}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+            <scope>compile</scope>
         </dependency>
 
 

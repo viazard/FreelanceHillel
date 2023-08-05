@@ -1,51 +1,57 @@
 package Api.AuthControllerTest;
 
+import Api.POJOClasses.AuthController.SignInSuccess;
+import Api.POJOClasses.UserController.UserControllerApiUser;
+import Api.UserController.UserController;
 import com.github.javafaker.Faker;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 public class AuthControllerTest {
+    private String userName = "Kylee";
+    private String password = "123456789";
+    private static ThreadLocal<String> tokenAuth = new ThreadLocal<>();
 
     @Test (priority = 1)
     public void userSignup() throws IOException, ClassNotFoundException {
         Faker faker = new Faker();
         String fakerName = faker.name().firstName();
         String fakerPassword = "123456789";
-        String messageActual = "User registered successfully";
-        SignInSuccess signInSuccess = new SignInSuccess();
+        String messageExpected = "User registered successfully";
 
         AuthController authController = new AuthController();
-        authController.signUp(fakerName, fakerPassword);
+        String messageActual = authController.signUp(fakerName, fakerPassword);
 
-        FileInputStream fis = new FileInputStream("result.bin");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        String messageExpected = (String) ois.readObject();
-        ois.close();
-
-        Assert.assertEquals(messageExpected, messageActual, "User doesn't registered");
+        Assert.assertEquals(messageActual, messageExpected, "User doesn't registered");
 
     }
 
     @Test (priority = 2)
-    public void userSignin() throws IOException, ClassNotFoundException {
-        String userName = "Kylee";
-        String password = "123456789";
+    public void userSignin() throws Exception {
 
         AuthController authController = new AuthController();
-        authController.signIn(userName, password);
+        String token = authController.signIn(userName, password);
 
-        FileInputStream fis = new FileInputStream("result.bin");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        boolean isSuccessActual = (boolean) ois.readObject();
-        String tokenActual = (String) ois.readObject();
-        ois.close();
+        String[] tokenAuthNotB = token.split("\\s");
+        tokenAuth.set(tokenAuthNotB[1]);
 
-        Assert.assertTrue(isSuccessActual, "User is not logged");
-        Assert.assertNotNull(tokenActual, "Token is empty");
+        Assert.assertNotNull(tokenAuth, "Token is empty");
 
     }
+
+    @Test (priority = 3)
+    public void userController() throws Exception {
+
+        UserController userController = new UserController();
+        userController.getCurrentUser(tokenAuth.get());
+
+        UserControllerApiUser userControllerApiUser = new UserControllerApiUser();
+    }
+
+/*    @Test (priority = 4)
+    public void exempleUser(){
+        System.out.println("My share token2: " + tokenLocal.get());
+    }*/
 }
